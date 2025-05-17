@@ -3,14 +3,14 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["src/*"],
-      "@packages/*": ["packages/*"]
-      // "@apps/*": ["apps/*"]
+      "@packages/*": ["packages/*"],
+      "@apps/*": ["apps/*"]
     }
   },
-  "include": ["packages/*", "eslint.config.ts"],
-  "references": [
-    { "path": "./packages/core" } // core 包会先被编译
-    // { "path": "./apps/server" }, // server 依赖 core，后编译
-    // { "path": "./apps/client" } // client 依赖 core，后编译
-  ]
+  "include": ["packages/*", "eslint.config.ts", "apps/*"]
+  // "references": [
+  //   { "path": "./packages/core" } // core 包会先被编译
+  //   // { "path": "./apps/server" }, // server 依赖 core，后编译
+  //   // { "path": "./apps/client" } // client 依赖 core，后编译
+  // ]
 }

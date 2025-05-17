@@ -7,24 +7,15 @@
     "allowImportingTsExtensions": true,
     "noEmit": true, // 由打包工具处理输出
     "composite": true,
-
     /* 类型检查 */
     "strict": true, // 启用所有严格类型检查
     "skipLibCheck": true, // 跳过声明文件检查（提升编译速度）
     "forceConsistentCasingInFileNames": true,
-
     /* 模块解析 */
     "baseUrl": "./", // 基础路径
-    // "paths": {
-    //   // 路径别名
-    //   "@/*": ["src/*"],
-    //   "@/components/*": ["src/components/*"]
-    // },
-
     /* 实验性功能 */
-    "experimentalDecorators": true, // NestJS 需要
-    "emitDecoratorMetadata": true, // NestJS 需要
-
+    // "experimentalDecorators": true, // NestJS 需要
+    // "emitDecoratorMetadata": true, // NestJS 需要
     /* 输出控制 */
     "esModuleInterop": true, // 兼容 CommonJS/ESM
     "isolatedModules": true // 确保每个文件都是独立模块

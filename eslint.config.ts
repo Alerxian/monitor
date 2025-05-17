@@ -1,70 +1,72 @@
-import tseslint from "@typescript-eslint/eslint-plugin";
-import tseslintParser from "@typescript-eslint/parser";
-import prettierConfig from "eslint-config-prettier";
-import type { Linter } from "eslint";
+import eslint from '@eslint/js';
+import globals from 'globals';
+import tseslint, { ConfigWithExtends } from 'typescript-eslint';
+import eslintPrettier from 'eslint-plugin-prettier';
+import importSort from 'eslint-plugin-simple-import-sort';
+import reactHooks from 'eslint-plugin-react-hooks';
+// import reactRefresh from 'eslint-plugin-react-refresh';
 
-// pnpm workspace eslint配置
+const ignores = [
+  'dist',
+  'build',
+  '**/*.js',
+  '**/*.mjs',
+  '**/*.d.ts',
+  'eslint.config.ts',
+  'commitlint.config.js',
+  'apps/frontend/monitor/src/components/ui/**/*',
+  'packages/browser-utils/src/metrics/**/*',
+];
 
-const eslintConfig = [
-  // 通用配置
-  {
-    ignores: ["dist/**", "node_modules/**", "*.d.ts"],
+const frontendMonitorConfig: ConfigWithExtends = {
+  files: ['apps/frontend/monitor/**/*.{ts,tsx}'],
+  ignores: ['apps/frontend/monitor/src/components/ui/**/*'],
+  languageOptions: {
+    ecmaVersion: 2020,
+    globals: globals.browser,
   },
-  // 配置文件的特殊配置
-  {
-    files: ["eslint.config.ts"],
-    languageOptions: {
-      parser: tseslintParser,
-      parserOptions: {
-        project: "./tsconfig.json",
-        tsconfigRootDir: process.cwd(),
-      },
-    },
+  plugins: {
+    'react-hooks': reactHooks,
+    // 'react-refresh': reactRefresh,
   },
-  {
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      parser: tseslintParser,
-      parserOptions: {
-        project: [
-          "./tsconfig.json",
-          // "./apps/tsconfig.json",
-          "./packages/*/tsconfig.json",
-        ],
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
+  rules: {
+    ...reactHooks.configs.recommended.rules,
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'no-console': 'error',
+  },
+};
+
+const backendMonitorConfig: ConfigWithExtends = {
+  files: ['apps/backend/**/*.ts'],
+  languageOptions: {
+    globals: {
+      ...globals.node, // global
+      ...globals.jest,
     },
+    parser: tseslint.parser,
+  },
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'no-console': 'error',
+  },
+};
+
+module.exports = tseslint.config(
+  {
+    ignores,
+    extends: [eslint.configs.recommended, ...tseslint.configs.recommended],
     plugins: {
-      "@typescript-eslint": tseslint,
+      prettier: eslintPrettier,
+      'simple-import-sort': importSort,
     },
     rules: {
-      // 基础规则
-      "no-console": ["error", { allow: ["warn", "error"] }],
-      "no-debugger": "error",
-      "no-var": "error",
-      "prefer-const": "error",
-
-      // TypeScript 规则
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-        },
-      ],
-      "@typescript-eslint/consistent-type-imports": [
-        "error",
-        {
-          prefer: "type-imports",
-        },
-      ],
-      "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/await-thenable": "error",
+      'prettier/prettier': 'error',
+      'simple-import-sort/imports': 'error',
     },
   },
-  prettierConfig,
-] as Linter.Config[];
-
-export default eslintConfig;
+  frontendMonitorConfig,
+  backendMonitorConfig,
+);
