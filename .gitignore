@@ -1,0 +1,48 @@
+# 通用忽略规则
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.swp
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 依赖目录
+node_modules/
+.pnpm-store/
+
+# 构建输出
+dist/
+build/
+out/
+.next/
+.nuxt/
+.serverless/
+.cache/
+
+# 环境文件
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
+
+# 测试覆盖
+coverage/
+.nyc_output/
+
+# 调试文件
+debug/
+*.pid
+
+# 系统文件
+Thumbs.db
+ehthumbs.db

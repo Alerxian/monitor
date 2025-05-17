@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true, // 启用项目引用
+    "outDir": "./dist", // 输出目录
+    "rootDir": "./src", // 源码根目录
+    "baseUrl": "./src", // 基础路径
+    "noEmit": false, // 生成声明文件
+    "emitDeclarationOnly": true // 仅输出声明文件
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts"]
+}
