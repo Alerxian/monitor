@@ -1,0 +1,16 @@
+services:
+  clickhouse:
+    image: bitnami/clickhouse:latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123"
+      - "8124:9000"
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=123456
+      - CLICKHOUSE_DATABASE=default
+
+networks:
+  default:
+    name: monitor-network
+    driver: bridge

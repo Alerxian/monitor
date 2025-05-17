@@ -7,11 +7,12 @@
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
     "commit": "cz",
-    "spell-check": "cspell \"**/*.{js,jsx,ts,tsx,md,json}\"",
+    "spellcheck": "cspell lint --dot --gitignore --color --cache --show-suggestions \"(packages|apps)/**/*.@(html|js|cjs|mjs|ts|tsx|css|scss|md)\"",
     "prepare": "husky",
     "format": "prettier . --write --ignore-path .gitignore",
     "test": "",
-    "build": "pnpm --filter @monitor/* build"
+    "build": "pnpm --filter @monitor/* build",
+    "docker:start": "docker compose -p monitor -f .devcontainer/docker-compose.yml up -d"
   },
   "keywords": [],
   "author": "",

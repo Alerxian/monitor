@@ -1,5 +1,5 @@
-import { Integration } from '@monitor/core';
 import type { Transport } from '@monitor/core';
+import { Integration } from '@monitor/core';
 
 export class ErrorIntegration extends Integration {
   constructor(transport: Transport) {

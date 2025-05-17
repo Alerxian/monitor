@@ -1,9 +1,10 @@
+import { getBrowserInfo } from '@monitor/browser-utils';
 import type { Transport } from '@monitor/core';
 
 export class BrowserTransport implements Transport {
   constructor(private dsn: string) {}
   send(data: Record<string, unknown>) {
-    const browserInfo = {};
+    const browserInfo = getBrowserInfo();
     const payload = {
       ...data,
       browserInfo,

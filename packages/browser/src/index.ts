@@ -1,7 +1,8 @@
 import type { MonitorOptions } from '@monitor/core';
 import { Monitoring } from '@monitor/core';
-import { BrowserTransport } from './transport';
+
 import { ErrorIntegration } from './tracing/errorsIntegration';
+import { BrowserTransport } from './transport';
 
 export const init = (options: MonitorOptions) => {
   // 初始化monitor

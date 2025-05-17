@@ -1,12 +1,21 @@
 import './style.css';
-import typescriptLogo from './typescript.svg';
-import viteLogo from '/vite.svg';
-import { setupCounter } from './counter.ts';
+
 import { init } from '@monitor/browser';
 
+import viteLogo from '/vite.svg';
+
+import { setupCounter } from './counter.ts';
+import typescriptLogo from './typescript.svg';
+
 init({
-  dsn: 'localhost:8000/appid-xxx',
+  dsn: 'http://localhost:8000/tracing',
 });
+
+fetch('https://baidu.com')
+  .then((res) => res.json())
+  .then(console.log);
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+myFn;
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
