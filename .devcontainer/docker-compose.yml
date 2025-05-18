@@ -3,12 +3,21 @@ services:
     image: bitnami/clickhouse:latest
     container_name: clickhouse
     ports:
-      - "8123:8123"
-      - "8124:9000"
+      - '8123:8123'
+      - '8124:9000'
     environment:
       - CLICKHOUSE_USER=default
       - CLICKHOUSE_PASSWORD=123456
       - CLICKHOUSE_DATABASE=default
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=postgres
 
 networks:
   default:

@@ -4,7 +4,7 @@ import tseslint, { ConfigWithExtends } from 'typescript-eslint';
 import eslintPrettier from 'eslint-plugin-prettier';
 import importSort from 'eslint-plugin-simple-import-sort';
 import reactHooks from 'eslint-plugin-react-hooks';
-// import reactRefresh from 'eslint-plugin-react-refresh';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 const ignores = [
   'dist',
@@ -27,7 +27,7 @@ const frontendMonitorConfig: ConfigWithExtends = {
   },
   plugins: {
     'react-hooks': reactHooks,
-    // 'react-refresh': reactRefresh,
+    'react-refresh': reactRefresh,
   },
   rules: {
     ...reactHooks.configs.recommended.rules,
