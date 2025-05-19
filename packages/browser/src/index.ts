@@ -1,3 +1,4 @@
+import { VitalsIntegration } from '@monitor/browser-utils';
 import type { MonitorOptions } from '@monitor/core';
 import { Monitoring } from '@monitor/core';
 
@@ -15,7 +16,7 @@ export const init = (options: MonitorOptions) => {
   new ErrorIntegration(transport).init();
 
   // 性能采集
-  // new Metrics(transport).init();
+  new VitalsIntegration(transport).init();
 
   return monitor;
 };

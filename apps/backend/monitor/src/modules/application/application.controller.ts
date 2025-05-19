@@ -6,7 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { ApplicationService } from './application.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
@@ -17,6 +19,7 @@ export class ApplicationController {
   constructor(private readonly applicationService: ApplicationService) {}
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   create(@Body() createApplicationDto: CreateApplicationDto) {
     return this.applicationService.create(createApplicationDto);
   }

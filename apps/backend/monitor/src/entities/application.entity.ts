@@ -3,7 +3,7 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 import { BaseEntity } from './common';
 import { UserEntity } from './user.entity';
 
-enum ApplicationType {
+export enum ApplicationType {
   React = 'react',
   Vue = 'vue',
   Vanilla = 'vanilla',

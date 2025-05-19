@@ -1,3 +1,4 @@
+-- Active: 1747645762345@@127.0.0.1@8123@default
 -- 创建存储表
 -- 删除已有的表（如果存在）
 DROP TABLE IF EXISTS base_monitor_storage;
@@ -25,7 +26,10 @@ ORDER BY tuple () -- 定义排序规则
 SELECT
     *,
     -- 在此可以对 raw_message 进行任何所需的处理或选择部分字段
-    concat('妙码学院', event_type) AS processed_message,
+    concat(
+        'my_prefix_monitor',
+        event_type
+    ) AS processed_message,
     now('Asia/Shanghai') AS created_at
 FROM base_monitor_storage;
 

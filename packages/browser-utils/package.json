@@ -26,5 +26,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "web-vitals": "5.0.1",
+    "@monitor/core": "workspace:*"
+  }
 }

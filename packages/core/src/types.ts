@@ -6,10 +6,8 @@ export interface IIntegration {
 
 export class Integration implements IIntegration {
   transport: Transport | null = null;
-  constructor() {}
-
-  init(transport: Transport) {
-    this.transport = transport;
+  init() {
+    throw new Error('Method not implemented.');
   }
 }
 

@@ -21,10 +21,13 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return {
+      code: 200,
+      message: 'User list',
+    };
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

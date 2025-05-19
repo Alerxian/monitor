@@ -2,7 +2,7 @@ import type { Transport } from '@monitor/core';
 import { Integration } from '@monitor/core';
 
 export class ErrorIntegration extends Integration {
-  constructor(transport: Transport) {
+  constructor(transport: Transport | null) {
     super();
     this.transport = transport;
   }

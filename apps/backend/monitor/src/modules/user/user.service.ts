@@ -26,7 +26,16 @@ export class UserService {
   // }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.userRepository.findOne({
+      where: { id },
+    });
+  }
+
+  async validateUser(username: string, password: string) {
+    const user = await this.userRepository.findOne({
+      where: { username, password },
+    });
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

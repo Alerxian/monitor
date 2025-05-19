@@ -8,3 +8,5 @@ export const getBrowserInfo = () => {
     path: location.pathname,
   };
 };
+
+export { VitalsIntegration } from './integrations';

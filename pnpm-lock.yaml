@@ -369,7 +369,14 @@ importers:
         specifier: workspace:*
         version: link:../core
 
-  packages/browser-utils: {}
+  packages/browser-utils:
+    dependencies:
+      '@monitor/core':
+        specifier: workspace:*
+        version: link:../core
+      web-vitals:
+        specifier: 5.0.1
+        version: 5.0.1
 
   packages/core: {}
 
@@ -9213,6 +9220,12 @@ packages:
       }
     engines: { node: '>= 8' }
 
+  web-vitals@5.0.1:
+    resolution:
+      {
+        integrity: sha512-BsULPWaCKAAtNntUz0aJq1cu1wyuWmDzf4N6vYNMbYA6zzQAf2pzCYbyClf+Ui2MI54bt225AwugXIfL1W+Syg==,
+      }
+
   webidl-conversions@4.0.2:
     resolution:
       {
@@ -14901,6 +14914,8 @@ snapshots:
       defaults: 1.0.4
 
   web-streams-polyfill@3.3.3: {}
+
+  web-vitals@5.0.1: {}
 
   webidl-conversions@4.0.2: {}
 
