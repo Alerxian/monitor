@@ -21,6 +21,7 @@
     "**/*.md",
     "eslint.config.js",
     "packages/browser-utils/src/metrics/**/*",
-    ".gitignore"
+    ".gitignore",
+    ".devcontainer/**"
   ]
 }

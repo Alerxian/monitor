@@ -11,8 +11,9 @@
     "prepare": "husky",
     "format": "prettier . --write --ignore-path .gitignore",
     "test": "",
-    "build": "pnpm --filter @monitor/* build",
-    "docker:start": "docker compose -p monitor -f .devcontainer/docker-compose.yml up -d"
+    "build": "pnpm --recursive --filter !./demos/* build",
+    "docker:start": "docker compose -p monitor -f .devcontainer/docker-compose.yml up -d",
+    "docker:deploy": "docker compose -p monitor-deploy -f .devcontainer/docker-compose.deploy.yml up -d"
   },
   "keywords": [],
   "author": "",

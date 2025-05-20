@@ -1,0 +1,18 @@
+localhost {
+  encode gzip zstd
+
+  handle_path /api/* {
+    rewrite * /{path.1}
+    reverse_proxy :8081
+  }
+
+  uri strip_suffix /
+
+  root * /app/frontend/monitor/dist
+
+  handle {
+    templates
+    try_files {path} /index.html
+    file_server
+  }
+}
