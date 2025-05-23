@@ -4,7 +4,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export class BaseEntity {
+export class CommonEntity {
   @PrimaryGeneratedColumn({
     comment: '主键 id',
   })

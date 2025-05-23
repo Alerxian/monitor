@@ -1,14 +1,15 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 
 import { ApplicationEntity } from './application.entity';
-import { BaseEntity } from './common';
+import { CommonEntity } from './common';
+import { RoleEntity } from './role.entity';
 
 enum UserStatus {
   Active = 1,
   Inactive = 0,
 }
 @Entity('user')
-export class UserEntity extends BaseEntity {
+export class UserEntity extends CommonEntity {
   @Column({
     type: 'varchar',
     length: 20,
@@ -57,4 +58,7 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => ApplicationEntity, (app) => app.user)
   applications: ApplicationEntity[];
+
+  @ManyToMany(() => RoleEntity)
+  roles: RoleEntity[];
 }

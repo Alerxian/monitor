@@ -1,10 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { UserEntity } from 'src/entities/user.entity';
+import { saltOrRounds } from 'src/fundamentals/common/constants';
 import { Repository } from 'typeorm';
 
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -12,18 +13,17 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
   ) {}
-  async create(createUserDto: CreateUserDto) {
-    await this.userRepository.save(createUserDto);
+  async register(createUserDto: CreateUserDto) {
+    const { password } = createUserDto;
+    createUserDto.password = await bcrypt.hash(password, saltOrRounds);
+
+    const user = await this.userRepository.save(createUserDto);
     return {
       code: 200,
-      message: 'User created successfully',
-      data: createUserDto,
+      message: '注册成功',
+      data: user,
     };
   }
-
-  // findAll() {
-  //   return `This action returns all user`;
-  // }
 
   findOne(id: number) {
     return this.userRepository.findOne({
@@ -31,14 +31,27 @@ export class UserService {
     });
   }
 
-  async validateUser(username: string, password: string) {
-    const user = await this.userRepository.findOne({
-      where: { username, password },
+  findByUserName(username: string) {
+    return this.userRepository.findOne({
+      where: { username },
     });
+  }
+
+  async validateUser(username: string, password: string) {
+    const user = await this.findByUserName(username);
+    if (!user) {
+      return null;
+    }
+
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return null;
+    }
+
     return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number, updateUserDto) {
     Logger.log(updateUserDto);
     return `This action updates a #${id} user`;
   }

@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
 
-import { BaseEntity } from './common';
+import { CommonEntity } from './common';
 import { UserEntity } from './user.entity';
 
 export enum ApplicationType {
@@ -10,7 +10,7 @@ export enum ApplicationType {
 }
 
 @Entity('application')
-export class ApplicationEntity extends BaseEntity {
+export class ApplicationEntity extends CommonEntity {
   @Column({
     type: 'varchar',
     length: 20,

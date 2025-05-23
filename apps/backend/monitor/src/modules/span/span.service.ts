@@ -3,7 +3,10 @@ import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SpanService {
-  constructor(@Inject('CLICK_HOUSE_CLIENT') private readonly clickhouseClient: ClickHouseClient) {}
+  constructor(
+    @Inject('CLICK_HOUSE_CLIENT')
+    private readonly clickhouseClient: ClickHouseClient,
+  ) {}
 
   async tracing(data) {
     const values = {

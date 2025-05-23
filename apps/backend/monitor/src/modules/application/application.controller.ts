@@ -7,11 +7,16 @@ import {
   Patch,
   Post,
   UseGuards,
+  UsePipes,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ZodValidationPipe } from 'src/fundamentals/pipes/zod.validation.pipe';
 
 import { ApplicationService } from './application.service';
-import { CreateApplicationDto } from './dto/create-application.dto';
+import {
+  CreateApplicationDto,
+  CreateAppSchema,
+} from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 
 @Controller('application')
@@ -20,6 +25,7 @@ export class ApplicationController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
+  @UsePipes(new ZodValidationPipe(CreateAppSchema))
   create(@Body() createApplicationDto: CreateApplicationDto) {
     return this.applicationService.create(createApplicationDto);
   }

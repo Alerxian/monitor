@@ -6,40 +6,43 @@ import {
   Param,
   Patch,
   Post,
+  Request,
+  UseGuards,
+  UsePipes,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ZodValidationPipe } from 'src/fundamentals/pipes/zod.validation.pipe';
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Roles } from '../auth/decorators/role.decorator';
+import { RoleGuard } from '../auth/guards/role.guard';
+import { CreateUserDto, CreateUserSchema } from './dto/create-user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('register')
+  @UsePipes(new ZodValidationPipe(CreateUserSchema))
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.userService.register(createUserDto);
   }
 
-  @Get()
-  findAll() {
-    return {
-      code: 200,
-      message: 'User list',
-    };
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @Get('')
+  @UseGuards(AuthGuard('jwt'))
+  getUserDetail(@Request() req: Express.Request) {
+    const username = req.user.username;
+    return this.userService.findByUserName(username);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param('id') id: string, @Body() updateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
+  @Roles('admin')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
