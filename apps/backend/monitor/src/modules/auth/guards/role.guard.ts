@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   ForbiddenException,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
@@ -21,8 +22,11 @@ export class RoleGuard implements CanActivate {
       return true;
     }
 
+    Logger.log(`requiredRoles: ${requiredRoles}`);
+
     const request = context.switchToHttp().getRequest<Express.Request>();
     const user = request.user;
+    Logger.log(user, 'user roles');
 
     const hasRole = requiredRoles.some((role) => user.roles?.includes(role));
     if (!hasRole) {

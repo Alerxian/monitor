@@ -1,4 +1,5 @@
 import {
+  ArgumentMetadata,
   BadRequestException,
   Injectable,
   Logger,
@@ -9,7 +10,10 @@ import { ZodSchema } from 'zod';
 @Injectable()
 export class ZodValidationPipe implements PipeTransform {
   constructor(private schema: ZodSchema) {}
-  transform(value: unknown) {
+  transform(value: unknown, metadata: ArgumentMetadata) {
+    if (metadata.type !== 'body') {
+      return value; // 跳过非body参数（如params中的id）
+    }
     const result = this.schema.safeParse(value);
     if (!result.success) {
       Logger.error(result.error.errors);

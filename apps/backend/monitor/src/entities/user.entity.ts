@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 
 import { ApplicationEntity } from './application.entity';
 import { CommonEntity } from './common';
@@ -48,17 +48,10 @@ export class UserEntity extends CommonEntity {
   }) // 1: Active, 0: Inactive
   status: UserStatus;
 
-  @Column({
-    type: 'varchar',
-    length: 50,
-    nullable: true,
-    comment: '角色',
-  })
-  role: string;
-
   @OneToMany(() => ApplicationEntity, (app) => app.user)
   applications: ApplicationEntity[];
 
-  @ManyToMany(() => RoleEntity)
+  @ManyToMany(() => RoleEntity, (role) => role.users)
+  @JoinTable()
   roles: RoleEntity[];
 }

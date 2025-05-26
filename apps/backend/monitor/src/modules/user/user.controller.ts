@@ -32,7 +32,7 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   getUserDetail(@Request() req: Express.Request) {
     const username = req.user.username;
-    return this.userService.findByUserName(username);
+    return this.userService.findUserAndRoles(username);
   }
 
   @Patch(':id')
@@ -42,7 +42,7 @@ export class UserController {
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'), RoleGuard)
-  @Roles('admin')
+  @Roles('SUPER_ADMIN', 'ADMIN')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }

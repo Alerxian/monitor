@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClickHouseModule } from './fundamentals/clickhouse/clickhouse.module';
 import { ApplicationModule } from './modules/application/application.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { RoleModule } from './modules/roles/role.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -27,6 +28,7 @@ import { UserModule } from './modules/user/user.module';
     UserModule,
     ApplicationModule,
     AuthModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [],

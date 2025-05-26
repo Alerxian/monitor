@@ -25,9 +25,29 @@ export class UserService {
     };
   }
 
-  findOne(id: number) {
+  findById(id: number, relations: string[] = []) {
     return this.userRepository.findOne({
       where: { id },
+      relations,
+    });
+  }
+
+  findUserAndRoles(username: string) {
+    return this.userRepository.findOne({
+      where: { username },
+      relations: ['roles', 'roles.permissions'],
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        phone: true,
+        status: true,
+        roles: {
+          name: true,
+          description: true,
+          permissions: { id: true, name: true },
+        },
+      },
     });
   }
 

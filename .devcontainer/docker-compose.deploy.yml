@@ -1,4 +1,3 @@
-
 include:
   - docker-compose.yml
 
@@ -7,7 +6,7 @@ services:
     image: bitnami/node:latest
     container_name: monitor-server
     ports:
-      - "8081:8081"
+      - '8081:8081'
     volumes:
       - ../:/app/monitor
     working_dir: /app/monitor/apps/backend/monitor
@@ -21,9 +20,8 @@ services:
     image: caddy:latest
     container_name: monitor-caddy
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./caddy:/etc/caddy
       - ../apps/frontend/monitor/dist:/app/frontend/monitor/dist
-

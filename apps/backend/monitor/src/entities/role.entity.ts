@@ -4,7 +4,7 @@ import { CommonEntity } from './common';
 import { PermissionEntity } from './permission.entity';
 import { UserEntity } from './user.entity';
 
-@Entity()
+@Entity('role')
 export class RoleEntity extends CommonEntity {
   @Column({ unique: true, comment: '角色名称' })
   name: string;
