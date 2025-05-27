@@ -1,18 +1,11 @@
 import './App.css';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { RouterProvider } from 'react-router-dom';
+
+import routes from './routes';
 
 function App() {
-  return (
-    <>
-      <Button>21321313</Button>
-      <Card>
-        <CardHeader>header</CardHeader>
-        <CardContent>content</CardContent>
-      </Card>
-    </>
-  );
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
