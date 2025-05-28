@@ -2,16 +2,16 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import MainLayout from '@/layouts/MainLayout';
 
-// import AuthGuard from './AuthGuard';
+import AuthGuard from './AuthGuard';
 import { lazyLoad } from './LazyLoad';
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: (
-      // <AuthGuard>
-      <MainLayout />
-      // </AuthGuard>
+      <AuthGuard>
+        <MainLayout />
+      </AuthGuard>
     ),
     errorElement: <div>Error loading page</div>,
     children: [

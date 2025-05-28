@@ -1,3 +1,4 @@
 clickhouse
+sonner
 tabler
 TTFB
