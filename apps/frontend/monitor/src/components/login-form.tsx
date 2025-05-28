@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { useUserLogin } from '@/api/user';
@@ -24,6 +25,7 @@ const loginSchema = z.object({
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -38,6 +40,12 @@ export const LoginForm = () => {
     loginMutate(values, {
       onSuccess: (data) => {
         localStorage.setItem('auth_token', data.access_token);
+        navigate('/dashboard', {
+          replace: true,
+          state: {
+            from: '/login',
+          },
+        });
       },
     });
   };

@@ -23,14 +23,14 @@ import { UpdateApplicationDto } from './dto/update-application.dto';
 export class ApplicationController {
   constructor(private readonly applicationService: ApplicationService) {}
 
-  @Post()
+  @Post('create')
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ZodValidationPipe(CreateAppSchema))
   create(@Body() createApplicationDto: CreateApplicationDto) {
     return this.applicationService.create(createApplicationDto);
   }
 
-  @Get()
+  @Get('list')
   findAll() {
     return this.applicationService.findAll();
   }

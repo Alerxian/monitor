@@ -38,8 +38,16 @@ export class ApplicationService {
     }
   }
 
-  findAll() {
-    return `This action returns all application`;
+  async findAll() {
+    const [list, total] = await this.appRepository.findAndCount();
+    return {
+      code: 200,
+      message: 'success',
+      data: {
+        list,
+        total,
+      },
+    };
   }
 
   findOne(id: number) {

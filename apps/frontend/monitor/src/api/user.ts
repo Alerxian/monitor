@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { request } from './request';
+import w from './http';
 
 const api = {
-  login: `POST /auth/login`,
+  login: `/auth/login`,
 };
 
 interface LoginParams {
@@ -21,7 +21,7 @@ export const useUserLogin = () => {
   return useMutation<LoginResult, unknown, LoginParams>({
     mutationKey: ['user', 'login'],
     mutationFn: (data) => {
-      return request(api.login, data);
+      return <Promise<LoginResult>>w.post(data, api.login);
     },
   });
 };

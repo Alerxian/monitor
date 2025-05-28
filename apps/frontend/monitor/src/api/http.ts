@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { toast } from 'sonner';
 import wretch from 'wretch';
 import AbortAddon from 'wretch/addons/abort';
